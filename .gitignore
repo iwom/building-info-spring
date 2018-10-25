@@ -1,0 +1,8 @@
+node_modules
+*.iml
+*.ipr
+*.iws
+.idea
+out
+test-output
+atlassian-ide-plugin.xml
