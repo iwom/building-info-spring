@@ -16,7 +16,7 @@ services:
     networks:
       - bldr
 
-  twp-phpmyadmin:
+  builder-phpmy:
     restart: always
     container_name: builder-myadmin
     image: phpmyadmin/phpmyadmin
