@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  builder-db:
+    container_name: builder-db
+    image: mysql:5
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=builder_project
+      - MYSQL_HOST=%
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/mysql
+    restart: always
+    networks:
+      - bldr
+
+  twp-phpmyadmin:
+    restart: always
+    container_name: builder-myadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8000:80
+    environment:
+      - PMA_HOST=builder-db
+    depends_on:
+      - builder-db
+    networks:
+      - bldr
+
+networks:
+  bldr:
+    driver: bridge
