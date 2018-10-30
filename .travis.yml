@@ -11,4 +11,5 @@ before_install:
  - sudo mv docker-compose /usr/local/bin
 
 script:
+  - cd docker
   - docker-compose -f docker-compose-e2e.yml build

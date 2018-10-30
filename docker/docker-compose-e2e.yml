@@ -14,32 +14,14 @@ services:
     volumes:
       - /data/mysql
     restart: always
-    healthcheck:
-      test:  ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      interval: 15s
-      timeout: 10s
-      retries: 5
-    networks:
-      - bldr
-
-  builder-phpmy:
-    restart: always
-    container_name: builder-myadmin
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - 8000:80
-    environment:
-      - PMA_HOST=builder-db
-    depends_on:
-      - builder-db
     networks:
       - bldr
 
   builder-backend:
     container_name: builder-backend
     build:
-      context: ./backend-builder
-      dockerfile: Dockerfile
+      context: ../backend-builder
+      dockerfile: Dockerfile-E2E
     ports:
       - 8080:8080
     restart: on-failure
