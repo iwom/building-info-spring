@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  builder-db:
+    container_name: builder-db
+    image: mysql:5
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=builder_project
+      - MYSQL_HOST=%
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/mysql
+    restart: always
+    networks:
+      - bldr
+
+  builder-backend:
+    container_name: builder-backend
+    build:
+      context: ./backend-builder
+      dockerfile: Dockerfile-E2E
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - builder-db
+    networks:
+      - bldr
+
+networks:
+  bldr:
+    driver: bridge
