@@ -1,4 +1,4 @@
-package com.builder.demo.controller;
+package com.builder.demo.controller.temp;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
