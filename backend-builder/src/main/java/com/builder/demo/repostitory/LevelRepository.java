@@ -3,6 +3,8 @@ package com.builder.demo.repostitory;
 
 import com.builder.demo.model.Level;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
-public abstract class LevelRepository implements PagingAndSortingRepository<Level, Long> {
+@Repository
+public interface LevelRepository extends PagingAndSortingRepository<Level, Long> {
 }

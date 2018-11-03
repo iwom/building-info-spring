@@ -2,6 +2,8 @@ package com.builder.demo.repostitory;
 
 import com.builder.demo.model.Room;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
-public abstract class RoomRepository implements PagingAndSortingRepository<Room, Long> {
+@Repository
+public interface RoomRepository extends PagingAndSortingRepository<Room, Long> {
 }
