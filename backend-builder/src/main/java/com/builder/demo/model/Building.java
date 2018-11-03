@@ -2,17 +2,27 @@ package com.builder.demo.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
+@Table(name = "buildings")
 @Getter
 @Setter
-public class Building {
+@ToString
+public class Building implements Serializable {
+    private static final long serialVersionUID = 5313493413859894401L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
+    private List<Floor> floorList;
+
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
+    private List<Room> roomList;
 }

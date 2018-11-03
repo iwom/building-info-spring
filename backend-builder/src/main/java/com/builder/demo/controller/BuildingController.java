@@ -2,6 +2,7 @@ package com.builder.demo.controller;
 
 import com.builder.demo.service.impl.BuildingServiceImpl;
 import com.builder.demo.shared.dto.BuildingDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BuildingController {
 
+    @Autowired
     BuildingServiceImpl buildingService;
+
 
     @PostMapping
     @RequestMapping(path = "/buildings",
