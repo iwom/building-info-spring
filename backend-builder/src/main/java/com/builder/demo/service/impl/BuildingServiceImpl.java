@@ -6,11 +6,9 @@ import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.service.BuildingService;
 import com.builder.demo.shared.dto.BuildingDto;
-import com.builder.demo.shared.dto.FloorDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
@@ -30,11 +28,7 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public BuildingDto createBuilding(BuildingDto buildingDto) {
         Building building = modelMapper.map(buildingDto, Building.class);
-        building.getFloorList().forEach(floor -> {
-            floor.setBuilding(building);
-            System.out.println(floor.getBuilding().getId());
-        });
-        buildingRepository.save(building);
-        return buildingDto;
+        Building savedBuilding = buildingRepository.save(building);
+        return modelMapper.map(savedBuilding, BuildingDto.class);
     }
 }

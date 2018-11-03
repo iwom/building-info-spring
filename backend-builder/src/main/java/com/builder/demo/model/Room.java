@@ -17,8 +17,8 @@ public class Room implements Serializable {
     private static final long serialVersionUID = 5313493413859894399L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    private Long roomId;
+    private String roomName;
     private float area;
     private float cube;
     private float heating;
