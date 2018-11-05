@@ -9,6 +9,8 @@ import com.builder.demo.shared.dto.RoomDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.builder.demo.model.Stats;
+
 @Service
 public class RoomServiceImpl implements RoomService {
 

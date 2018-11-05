@@ -25,4 +25,8 @@ public class Building implements Serializable {
 
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
     private List<Room> roomList;
+
+    public Long getId() {
+        return id;
+    }
 }

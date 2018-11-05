@@ -26,4 +26,12 @@ public class Floor implements Serializable {
 
     @OneToMany(mappedBy = "floor", cascade = CascadeType.ALL)
     private List<Room> roomList;
+
+    public Long getFloorId() {
+        return floorId;
+    }
+
+    public List<Room> getRoomList() {
+        return roomList;
+    }
 }
