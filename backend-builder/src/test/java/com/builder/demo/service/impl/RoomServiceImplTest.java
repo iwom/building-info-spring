@@ -1,5 +1,6 @@
 package com.builder.demo.service.impl;
 
+import com.builder.demo.exception.service.RoomServiceException;
 import com.builder.demo.model.Building;
 import com.builder.demo.model.Floor;
 import com.builder.demo.model.Room;
@@ -48,6 +49,8 @@ public class RoomServiceImplTest {
     RoomServiceImpl roomService;
 
     Room room;
+    RoomDto roomDto;
+
     public static final Long BUILDING_ID = 1L;
     public static final Long FLOOR_ID = 1L;
     public static final Long ROOM_ID = 1L;
@@ -60,6 +63,12 @@ public class RoomServiceImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        roomDto = RoomDto.builder()
+                .roomName(ROOM_NAME)
+                .area(AREA)
+                .cube(CUBE)
+                .heating(HEATING)
+                .light(LIGHT).build();
         room = new Room();
         room.setRoomId(ROOM_ID);
         room.setRoomName(ROOM_NAME);
@@ -74,15 +83,11 @@ public class RoomServiceImplTest {
     @Test
     public void createRoom() {
         when(roomRepository.save(any(Room.class))).thenReturn(room);
+        when(roomRepository.findByRoomName(any(String.class))).thenReturn(Optional.ofNullable(null));
         when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(new Building()));
         when(floorRepository.findById(any(Long.class))).thenReturn(Optional.of(new Floor()));
 
-        RoomDto roomDto = RoomDto.builder()
-                .roomName(ROOM_NAME)
-                .area(AREA)
-                .cube(CUBE)
-                .heating(HEATING)
-                .light(LIGHT).build();
+
         RoomDto storedDto = roomService.createRoom(roomDto, BUILDING_ID, FLOOR_ID);
 
         assertNotNull(storedDto);
@@ -93,5 +98,26 @@ public class RoomServiceImplTest {
         verify(roomRepository, times(1)).save(any(Room.class));
 
 
+    }
+
+    @Test(expected = RoomServiceException.class)
+    public void createRoom_throwsRecordAlreadyExists() {
+        when(roomRepository.findByRoomName(any(String.class))).thenReturn(Optional.of(new Room()));
+        RoomDto storedDto = roomService.createRoom(roomDto, BUILDING_ID, FLOOR_ID);
+    }
+
+    @Test(expected = RoomServiceException.class)
+    public void createRoom_throwsBuildingNotExists() {
+        when(roomRepository.findByRoomName(any(String.class))).thenReturn(Optional.ofNullable(null));
+        when(floorRepository.findById(any(Long.class))).thenReturn(Optional.of(new Floor()));
+        when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(null));
+        RoomDto storedDto = roomService.createRoom(roomDto, BUILDING_ID, FLOOR_ID);
+    }
+
+    @Test(expected = RoomServiceException.class)
+    public void createRoom_throwsFloorNotExists() {
+        when(roomRepository.findByRoomName(any(String.class))).thenReturn(Optional.ofNullable(null));
+        when(floorRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(null));
+        RoomDto storedDto = roomService.createRoom(roomDto, BUILDING_ID, FLOOR_ID);
     }
 }
