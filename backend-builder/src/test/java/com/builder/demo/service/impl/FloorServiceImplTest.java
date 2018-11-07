@@ -1,5 +1,6 @@
 package com.builder.demo.service.impl;
 
+import com.builder.demo.exception.service.FloorServiceException;
 import com.builder.demo.model.Building;
 import com.builder.demo.model.Floor;
 import com.builder.demo.repostitory.BuildingRepository;
@@ -44,6 +45,7 @@ public class FloorServiceImplTest {
     FloorServiceImpl floorService;
 
     Floor floor;
+    FloorDto floorDto;
 
     public static final Long BUILDING_ID = 1L;
     public static final Long FLOOR_ID = 1L;
@@ -52,6 +54,7 @@ public class FloorServiceImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        floorDto = FloorDto.builder().floorName(FLOOR_NAME).build();
         floor = new Floor();
         floor.setFloorId(FLOOR_ID);
         floor.setFloorName(FLOOR_NAME);
@@ -63,9 +66,9 @@ public class FloorServiceImplTest {
     @Test
     public void createFloor() {
         when(floorRepository.save(any(Floor.class))).thenReturn(floor);
+        when(floorRepository.findByFloorName(any(String.class))).thenReturn(Optional.ofNullable(null));
         when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(new Building()));
 
-        FloorDto floorDto = FloorDto.builder().floorName(FLOOR_NAME).build();
         FloorDto storedDto = floorService.createFloor(floorDto, BUILDING_ID);
 
         assertNotNull(storedDto);
@@ -73,5 +76,20 @@ public class FloorServiceImplTest {
         assertEquals(floor.getFloorId(), storedDto.getFloorId());
 
         verify(floorRepository, times(1)).save(any(Floor.class));
+    }
+
+    @Test(expected = FloorServiceException.class)
+    public void createFloor_throwsRecordAlreadyExists() {
+        when(floorRepository.findByFloorName(any(String.class))).thenReturn(Optional.of(new Floor()));
+
+        floorService.createFloor(floorDto, BUILDING_ID);
+    }
+
+    @Test(expected = FloorServiceException.class)
+    public void createFloor_throwsBuildingNotExists() {
+        when(floorRepository.findByFloorName(any(String.class))).thenReturn(Optional.ofNullable(null));
+        when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(null));
+
+        floorService.createFloor(floorDto, BUILDING_ID);
     }
 }

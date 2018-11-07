@@ -6,10 +6,12 @@ import com.builder.demo.model.Room;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.List;
 
 @Repository
 public interface RoomRepository extends PagingAndSortingRepository<Room, Long> {
+    Optional<Room> findByRoomName(String name);
     List<Room> findAllByBuildingIdEquals(Long buildingId);
     List<Room> findAllByBuildingIdEqualsAndFloorFloorIdEquals(Long buildingId, Long floorId);
     List<Room> findAllByBuildingIdEqualsAndFloorFloorIdEqualsAndRoomId(Long buildingId, Long floorId, Long roomId);
