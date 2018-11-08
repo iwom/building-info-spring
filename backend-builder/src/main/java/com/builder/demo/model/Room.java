@@ -19,9 +19,13 @@ public class Room implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
     private String roomName;
+    @Getter
     private float area;
+    @Getter
     private float cube;
+    @Getter
     private float heating;
+    @Getter
     private float light;
 
     @ManyToOne
@@ -31,7 +35,4 @@ public class Room implements Serializable {
     @ManyToOne
     @JoinColumn(name = "building_id")
     private Building building;
-
-
-
 }

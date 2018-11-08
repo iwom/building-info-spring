@@ -2,6 +2,8 @@ package com.builder.demo.service.impl;
 
 import com.builder.demo.exception.service.FloorServiceException;
 import com.builder.demo.model.Floor;
+import com.builder.demo.model.Room;
+import com.builder.demo.model.Stats;
 import com.builder.demo.model.error.ErrorMessages;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;

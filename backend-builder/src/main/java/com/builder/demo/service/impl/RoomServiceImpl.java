@@ -12,6 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.builder.demo.model.Stats;
+
 @Service
 public class RoomServiceImpl implements RoomService {
 
