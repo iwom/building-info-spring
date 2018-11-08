@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface FloorRepository extends PagingAndSortingRepository<Floor, Long> {
     Optional<Floor> findByFloorName(String floorName);
+    Optional<Floor> findByBuildingIdEqualsAndFloorIdEquals(Long buildingId, Long floorId);
 }

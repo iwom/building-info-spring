@@ -1,5 +1,7 @@
 package com.builder.demo.service.impl;
 
+import com.builder.demo.model.Building;
+import com.builder.demo.model.Floor;
 import com.builder.demo.model.Room;
 import com.builder.demo.model.Stats;
 import com.builder.demo.repostitory.BuildingRepository;
@@ -27,17 +29,17 @@ public class StatsServiceImpl implements StatsService {
     }
 
     public Stats getRoomStats(Long buildingId, Long floorId, Long roomId) {
-        List<Room> roomList = roomRepository.findAllByBuildingIdEqualsAndFloorFloorIdEqualsAndRoomId(buildingId, floorId, roomId);
-        return new Stats(roomList);
+        Room room = roomRepository.findByBuildingIdEqualsAndFloorFloorIdEqualsAndRoomId(buildingId, floorId, roomId).get();
+        return new Stats(room);
     }
 
     public Stats getFloorStats(Long buildingId, Long floorId) {
-        List<Room> roomList = roomRepository.findAllByBuildingIdEqualsAndFloorFloorIdEquals(buildingId, floorId);
-        return new Stats(roomList);
+        Floor floor = floorRepository.findByBuildingIdEqualsAndFloorIdEquals(buildingId, floorId).get();
+        return new Stats(floor);
     }
 
     public Stats getBuildingStats(Long buildingId) {
-        List<Room> roomList = roomRepository.findAllByBuildingIdEquals(buildingId);
-        return new Stats(roomList);
+        Building building = buildingRepository.findById(buildingId).get();
+        return new Stats(building);
     }
 }

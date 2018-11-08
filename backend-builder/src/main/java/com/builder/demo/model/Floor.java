@@ -17,6 +17,7 @@ public class Floor implements Serializable {
     private static final long serialVersionUID = 5313493413859894402L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long floorId;
     private String floorName;
 
@@ -25,13 +26,6 @@ public class Floor implements Serializable {
     private Building building;
 
     @OneToMany(mappedBy = "floor", cascade = CascadeType.ALL)
+    @Getter
     private List<Room> roomList;
-
-    public Long getFloorId() {
-        return floorId;
-    }
-
-    public List<Room> getRoomList() {
-        return roomList;
-    }
 }

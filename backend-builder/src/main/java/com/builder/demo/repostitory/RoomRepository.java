@@ -12,7 +12,5 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends PagingAndSortingRepository<Room, Long> {
     Optional<Room> findByRoomName(String name);
-    List<Room> findAllByBuildingIdEquals(Long buildingId);
-    List<Room> findAllByBuildingIdEqualsAndFloorFloorIdEquals(Long buildingId, Long floorId);
-    List<Room> findAllByBuildingIdEqualsAndFloorFloorIdEqualsAndRoomId(Long buildingId, Long floorId, Long roomId);
+    Optional<Room> findByBuildingIdEqualsAndFloorFloorIdEqualsAndRoomId(Long buildingId, Long floorId, Long roomId);
 }

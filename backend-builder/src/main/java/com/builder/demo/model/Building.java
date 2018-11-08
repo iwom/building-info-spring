@@ -17,16 +17,14 @@ public class Building implements Serializable {
     private static final long serialVersionUID = 5313493413859894401L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
     private String name;
 
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
+    @Getter
     private List<Floor> floorList;
 
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
     private List<Room> roomList;
-
-    public Long getId() {
-        return id;
-    }
 }
