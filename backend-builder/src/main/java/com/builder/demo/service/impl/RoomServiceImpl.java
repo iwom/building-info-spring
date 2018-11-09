@@ -8,6 +8,7 @@ import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.service.RoomService;
 import com.builder.demo.shared.dto.RoomDto;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.builder.demo.model.Stats;
 
 @Service
+@Slf4j
 public class RoomServiceImpl implements RoomService {
 
     BuildingRepository buildingRepository;
