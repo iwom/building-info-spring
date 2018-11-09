@@ -4,6 +4,7 @@ import com.builder.demo.model.Stats;
 import com.builder.demo.service.impl.BuildingServiceImpl;
 import com.builder.demo.service.impl.StatsServiceImpl;
 import com.builder.demo.shared.dto.BuildingDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.rmi.NoSuchObjectException;
 
 @RestController
+@Slf4j
 public class BuildingController {
 
     @Autowired

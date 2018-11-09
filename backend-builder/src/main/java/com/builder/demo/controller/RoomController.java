@@ -7,6 +7,7 @@ import com.builder.demo.service.impl.RoomServiceImpl;
 import com.builder.demo.service.impl.StatsServiceImpl;
 import com.builder.demo.shared.dto.FloorDto;
 import com.builder.demo.shared.dto.RoomDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.rmi.NoSuchObjectException;
 
 @RestController
 @RequestMapping("/buildings/{buildingId}/floors")
+@Slf4j
 public class RoomController {
 
     @Autowired

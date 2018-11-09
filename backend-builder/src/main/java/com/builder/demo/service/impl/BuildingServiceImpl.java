@@ -11,12 +11,14 @@ import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.service.BuildingService;
 import com.builder.demo.shared.dto.BuildingDto;
 import com.builder.demo.exception.service.BuildingServiceException;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class BuildingServiceImpl implements BuildingService {
 
     BuildingRepository buildingRepository;

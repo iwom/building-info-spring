@@ -8,12 +8,14 @@ import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.service.StatsService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class StatsServiceImpl implements StatsService {
 
     BuildingRepository buildingRepository;

@@ -10,11 +10,13 @@ import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.service.FloorService;
 import com.builder.demo.shared.dto.FloorDto;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class FloorServiceImpl implements FloorService {
 
     BuildingRepository buildingRepository;
