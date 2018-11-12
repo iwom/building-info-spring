@@ -41,7 +41,6 @@ public class FloorServiceImpl implements FloorService {
         floor.setBuilding(buildingRepository.findById(buildingId).get());
         Floor savedFloor = floorRepository.save(floor);
         log.info("Floor was successfully created");
-        log.info(savedFloor.toString());
         return modelMapper.map(savedFloor, FloorDto.class);
     }
 }
