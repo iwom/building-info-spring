@@ -43,6 +43,8 @@ public class RoomServiceImpl implements RoomService {
         room.setBuilding(buildingRepository.findById(buildingId).get());
         room.setFloor(floorRepository.findById(floorId).get());
         Room savedRoom = roomRepository.save(room);
+        log.info("Room was successfully created");
+        log.info(savedRoom.toString());
         return modelMapper.map(savedRoom, RoomDto.class);
     }
 }

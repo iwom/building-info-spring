@@ -39,6 +39,8 @@ public class BuildingServiceImpl implements BuildingService {
             throw new BuildingServiceException(ErrorMessages.RECORD_NOT_CREATED.getErrorMessage(), HttpStatus.CONFLICT);
         Building building = modelMapper.map(buildingDto, Building.class);
         Building savedBuilding = buildingRepository.save(building);
+        log.info("Building was successfully created");
+        log.info(savedBuilding.toString());
         return modelMapper.map(savedBuilding, BuildingDto.class);
     }
 }
