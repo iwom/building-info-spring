@@ -40,7 +40,6 @@ public class BuildingServiceImpl implements BuildingService {
         Building building = modelMapper.map(buildingDto, Building.class);
         Building savedBuilding = buildingRepository.save(building);
         log.info("Building was successfully created");
-        log.info(savedBuilding.toString());
         return modelMapper.map(savedBuilding, BuildingDto.class);
     }
 }
