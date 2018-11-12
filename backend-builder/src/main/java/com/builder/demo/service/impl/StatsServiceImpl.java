@@ -32,16 +32,25 @@ public class StatsServiceImpl implements StatsService {
 
     public Stats getRoomStats(Long buildingId, Long floorId, Long roomId) {
         Room room = roomRepository.findByBuildingIdEqualsAndFloorFloorIdEqualsAndRoomId(buildingId, floorId, roomId).get();
-        return new Stats(room);
+        Stats returnStats = new Stats(room);
+        log.info("Room stats successfully fetched");
+        log.info(returnStats.toString());
+        return returnStats;
     }
 
     public Stats getFloorStats(Long buildingId, Long floorId) {
         Floor floor = floorRepository.findByBuildingIdEqualsAndFloorIdEquals(buildingId, floorId).get();
-        return new Stats(floor);
+        Stats returnStats = new Stats(floor);
+        log.info("Floor stats successfully fetched");
+        log.info(returnStats.toString());
+        return returnStats;
     }
 
     public Stats getBuildingStats(Long buildingId) {
         Building building = buildingRepository.findById(buildingId).get();
-        return new Stats(building);
+        Stats returnStats = new Stats(building);
+        log.info("Building stats successfully fetched");
+        log.info(returnStats.toString());
+        return returnStats;
     }
 }

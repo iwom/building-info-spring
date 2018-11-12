@@ -1,8 +1,11 @@
 package com.builder.demo.model;
 
 import lombok.Getter;
+import lombok.ToString;
+
 import java.util.List;
 
+@ToString
 public class Stats {
 
     @Getter
