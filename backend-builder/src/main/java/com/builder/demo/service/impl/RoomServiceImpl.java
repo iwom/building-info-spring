@@ -1,7 +1,8 @@
 package com.builder.demo.service.impl;
 
 import com.builder.demo.exception.service.RoomServiceException;
-import com.builder.demo.model.Room;
+import com.builder.demo.model.impl.LocationVisitor;
+import com.builder.demo.model.impl.Room;
 import com.builder.demo.model.error.ErrorMessages;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
@@ -13,22 +14,21 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.builder.demo.model.Stats;
-
 @Service
-@Slf4j
 public class RoomServiceImpl implements RoomService {
 
     BuildingRepository buildingRepository;
     RoomRepository roomRepository;
     FloorRepository floorRepository;
     ModelMapper modelMapper;
+    LocationVisitor visitor;
 
     public RoomServiceImpl(BuildingRepository buildingRepository, RoomRepository roomRepository, FloorRepository floorRepository) {
         this.buildingRepository = buildingRepository;
         this.roomRepository = roomRepository;
         this.floorRepository = floorRepository;
         this.modelMapper = new ModelMapper();
+        this.visitor = new LocationVisitor();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RoomServiceImpl implements RoomService {
         room.setBuilding(buildingRepository.findById(buildingId).get());
         room.setFloor(floorRepository.findById(floorId).get());
         Room savedRoom = roomRepository.save(room);
-        log.info("Room was successfully created");
+        savedRoom.accept(visitor);
         return modelMapper.map(savedRoom, RoomDto.class);
     }
 }

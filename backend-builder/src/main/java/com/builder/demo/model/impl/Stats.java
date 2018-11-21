@@ -1,4 +1,4 @@
-package com.builder.demo.model;
+package com.builder.demo.model.impl;
 
 import lombok.Getter;
 import lombok.ToString;

@@ -1,6 +1,6 @@
 package com.builder.demo.controller;
 
-import com.builder.demo.model.Stats;
+import com.builder.demo.model.impl.Stats;
 import com.builder.demo.service.impl.BuildingServiceImpl;
 import com.builder.demo.service.impl.StatsServiceImpl;
 import com.builder.demo.shared.dto.BuildingDto;

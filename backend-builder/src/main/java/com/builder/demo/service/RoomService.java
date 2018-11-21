@@ -1,5 +1,8 @@
 package com.builder.demo.service;
 
+import com.builder.demo.model.impl.Building;
+import com.builder.demo.model.impl.Floor;
+import com.builder.demo.model.impl.Room;
 import com.builder.demo.shared.dto.RoomDto;
 
 /**
@@ -9,9 +12,9 @@ import com.builder.demo.shared.dto.RoomDto;
  */
 public interface RoomService {
     /**
-     * @param roomDto RoomDto to be created and persisted to database as {@link com.builder.demo.model.Room}
-     * @param buildingId parent id enabling to establish relationship between {@link com.builder.demo.model.Room} and {@link com.builder.demo.model.Building}
-     * @param floorId parent id enabling to establish relationship between {@link com.builder.demo.model.Room} and {@link com.builder.demo.model.Floor}
+     * @param roomDto RoomDto to be created and persisted to database as {@link Room}
+     * @param buildingId parent id enabling to establish relationship between {@link Room} and {@link Building}
+     * @param floorId parent id enabling to establish relationship between {@link Room} and {@link Floor}
      * @return {@link com.builder.demo.shared.dto.RoomDto} if the object was succesfully created, 4xx error otherwise.
      */
     RoomDto createRoom(RoomDto roomDto, Long buildingId, Long floorId);

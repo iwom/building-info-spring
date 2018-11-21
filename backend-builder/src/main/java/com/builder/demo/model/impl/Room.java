@@ -1,5 +1,7 @@
-package com.builder.demo.model;
+package com.builder.demo.model.impl;
 
+import com.builder.demo.model.Location;
+import com.builder.demo.model.Visitor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,8 +14,8 @@ import java.io.Serializable;
  * The entity holds information about a single room as well as parent ids
  * A Room can not exist without a Floor
  * A Floor can not exist without a Building
- * @see com.builder.demo.model.Building
- * @see com.builder.demo.model.Floor
+ * @see Building
+ * @see Floor
  * @author iwom
  */
 @Entity
@@ -21,7 +23,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class Room implements Serializable {
+public class Room implements Serializable, Location {
     /**
      * UID for serialization purposes
      */
@@ -58,16 +60,21 @@ public class Room implements Serializable {
     private float light;
 
     /**
-     * Association with {@link com.builder.demo.model.Floor}
+     * Association with {@link Floor}
      */
     @ManyToOne
     @JoinColumn(name = "floor_id")
     private Floor floor;
 
     /**
-     * Association with {@link com.builder.demo.model.Building}
+     * Association with {@link Building}
      */
     @ManyToOne
     @JoinColumn(name = "building_id")
     private Building building;
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

@@ -1,5 +1,6 @@
 package com.builder.demo.service;
 
+import com.builder.demo.model.impl.Building;
 import com.builder.demo.shared.dto.BuildingDto;
 
 /**
@@ -9,7 +10,7 @@ import com.builder.demo.shared.dto.BuildingDto;
  */
 public interface BuildingService {
     /**
-     * @param buildingDto BuildingDto to be created and persisted to database as {@link com.builder.demo.model.Building}
+     * @param buildingDto BuildingDto to be created and persisted to database as {@link Building}
      * @return {@link com.builder.demo.shared.dto.BuildingDto} if the object was succesfully created, 4xx error otherwise.
      */
     BuildingDto createBuilding(BuildingDto buildingDto);

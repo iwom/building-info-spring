@@ -1,6 +1,6 @@
 package com.builder.demo.repostitory;
 
-import com.builder.demo.model.Building;
+import com.builder.demo.model.impl.Building;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

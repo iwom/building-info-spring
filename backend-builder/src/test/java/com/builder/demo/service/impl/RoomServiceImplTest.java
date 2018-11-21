@@ -1,9 +1,9 @@
 package com.builder.demo.service.impl;
 
 import com.builder.demo.exception.service.RoomServiceException;
-import com.builder.demo.model.Building;
-import com.builder.demo.model.Floor;
-import com.builder.demo.model.Room;
+import com.builder.demo.model.impl.Building;
+import com.builder.demo.model.impl.Floor;
+import com.builder.demo.model.impl.Room;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
@@ -15,23 +15,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import static org.junit.Assert.*;
 
 
 public class RoomServiceImplTest {

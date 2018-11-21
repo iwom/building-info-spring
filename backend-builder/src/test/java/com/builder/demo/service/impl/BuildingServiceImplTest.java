@@ -1,7 +1,7 @@
 package com.builder.demo.service.impl;
 
 import com.builder.demo.exception.service.BuildingServiceException;
-import com.builder.demo.model.Building;
+import com.builder.demo.model.impl.Building;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.shared.dto.BuildingDto;
 import org.junit.Before;
@@ -11,20 +11,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class BuildingServiceImplTest {
