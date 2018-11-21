@@ -4,6 +4,7 @@ import com.builder.demo.exception.service.FloorServiceException;
 import com.builder.demo.model.impl.Floor;
 import com.builder.demo.model.error.ErrorMessages;
 import com.builder.demo.model.impl.LocationVisitor;
+import com.builder.demo.model.impl.Stats;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
@@ -13,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FloorServiceImpl implements FloorService {
@@ -42,5 +45,26 @@ public class FloorServiceImpl implements FloorService {
         Floor savedFloor = floorRepository.save(floor);
         savedFloor.accept(visitor);
         return modelMapper.map(savedFloor, FloorDto.class);
+    }
+
+    @Override
+    public FloorDto getFloor(Long buildingId, Long floorId) {
+        if(!buildingRepository.findById(buildingId).isPresent())
+            throw new FloorServiceException(ErrorMessages.BUILDING_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!floorRepository.findById(floorId).isPresent())
+            throw new FloorServiceException(ErrorMessages.FLOOR_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        Floor floor = floorRepository.findById(floorId).get();
+        Stats buildingStats = new Stats(floor);
+        FloorDto floorDto = modelMapper.map(floor, FloorDto.class);
+        floorDto.setArea(buildingStats.getArea());
+        floorDto.setCube(buildingStats.getCube());
+        floorDto.setHeating(buildingStats.getHeating());
+        floorDto.setLight(buildingStats.getLight());
+        return floorDto;
+    }
+
+    @Override
+    public List<FloorDto> getFloors() {
+        return null;
     }
 }

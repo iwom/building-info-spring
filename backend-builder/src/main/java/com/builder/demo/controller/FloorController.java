@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.rmi.NoSuchObjectException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/buildings")
@@ -33,13 +34,15 @@ public class FloorController {
         return floorService.createFloor(floorDto, Long.parseLong(buildingId));
     }
 
+    @GetMapping
     @RequestMapping(path = "/{buildingId}/floors/{floorId}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Stats returnFloorStats(@PathVariable String buildingId, @PathVariable String floorId) throws NoSuchObjectException {
-        Stats stats = statsService.getFloorStats(Long.parseLong(buildingId), Long.parseLong(floorId));
+    public FloorDto returnFloorStats(@PathVariable String buildingId, @PathVariable String floorId) {
+        return floorService.getFloor(Long.parseLong(buildingId), Long.parseLong(floorId));
+    }
 
-        if (stats.getArea() == 0 || stats.getCube() == 0 || stats.getHeating() == 0 || stats.getLight() == 0)
-            throw new NoSuchObjectException("Object not found");
-        else
-            return stats;
+    @GetMapping
+    @RequestMapping(path = "/{buildingId}/floors", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<FloorDto> getAllFloors() {
+        return null;
     }
 }

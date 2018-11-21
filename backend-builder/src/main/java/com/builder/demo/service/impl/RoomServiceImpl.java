@@ -4,6 +4,7 @@ import com.builder.demo.exception.service.RoomServiceException;
 import com.builder.demo.model.impl.LocationVisitor;
 import com.builder.demo.model.impl.Room;
 import com.builder.demo.model.error.ErrorMessages;
+import com.builder.demo.model.impl.Stats;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
@@ -13,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -46,4 +50,33 @@ public class RoomServiceImpl implements RoomService {
         savedRoom.accept(visitor);
         return modelMapper.map(savedRoom, RoomDto.class);
     }
+
+    @Override
+    public RoomDto getRoom(Long buildingId, Long floorId, Long roomId) {
+        if(!buildingRepository.findById(buildingId).isPresent())
+            throw new RoomServiceException(ErrorMessages.BUILDING_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!floorRepository.findById(floorId).isPresent())
+            throw new RoomServiceException(ErrorMessages.FLOOR_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!roomRepository.findById(roomId).isPresent())
+            throw new RoomServiceException(ErrorMessages.ROOM_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        Room room = roomRepository.findById(roomId).get();
+        Stats buildingStats = new Stats(room);
+        RoomDto roomDto = modelMapper.map(room, RoomDto.class);
+        roomDto.setArea(buildingStats.getArea());
+        roomDto.setCube(buildingStats.getCube());
+        roomDto.setHeating(buildingStats.getHeating());
+        roomDto.setLight(buildingStats.getLight());
+        return roomDto;
+    }
+
+    @Override
+    public List<RoomDto> getRooms(Long buildingId, Long floorId) {
+        List<RoomDto> roomDtos = new ArrayList<>();
+        List<Room> rooms = roomRepository.findAllByBuilding_IdAndFloor_FloorId(buildingId, floorId).get();
+        rooms.forEach(room -> {
+            roomDtos.add(modelMapper.map(room, RoomDto.class));
+        });
+        return roomDtos;
+    }
+
 }

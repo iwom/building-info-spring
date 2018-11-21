@@ -36,8 +36,13 @@ public class Stats {
 
         area = newArea;
         cube = newCube;
-        light = newLight / newArea;
-        heating = newHeating / newCube;
+        if (newArea > 0.0 && newCube > 0) {
+            light = newLight / newArea;
+            heating = newHeating / newCube;
+        } else {
+            light = 0.0f;
+            heating = 0.0f;
+        }
     }
 
     public Stats(Building building) {
@@ -55,7 +60,13 @@ public class Stats {
 
         area = newArea;
         cube = newCube;
-        light = newLight / floorListSize;
-        heating = newHeating / floorListSize;
+        if (newArea > 0.0 && newCube > 0) {
+            light = newLight / floorListSize;
+            heating = newHeating / floorListSize;
+        } else {
+            light = 0.0f;
+            heating = 0.0f;
+        }
+
     }
 }

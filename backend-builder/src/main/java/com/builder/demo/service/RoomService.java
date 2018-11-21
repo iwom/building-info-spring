@@ -5,6 +5,8 @@ import com.builder.demo.model.impl.Floor;
 import com.builder.demo.model.impl.Room;
 import com.builder.demo.shared.dto.RoomDto;
 
+import java.util.List;
+
 /**
  * RoomService - interface allowing CRUD operations on {@link com.builder.demo.shared.dto.RoomDto}
  * This service uses {@link com.builder.demo.repostitory.RoomRepository} to communicate with mysql database
@@ -18,4 +20,6 @@ public interface RoomService {
      * @return {@link com.builder.demo.shared.dto.RoomDto} if the object was succesfully created, 4xx error otherwise.
      */
     RoomDto createRoom(RoomDto roomDto, Long buildingId, Long floorId);
+    RoomDto getRoom(Long buildingId, Long floorId, Long roomId);
+    List<RoomDto> getRooms(Long buildingId, Long floorId);
 }

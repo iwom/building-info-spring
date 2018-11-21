@@ -17,4 +17,8 @@ public class FloorDto implements Serializable {
     private String floorName;
     private Long buildingId;
     private List<RoomDto> roomDtoList;
+    private float area;
+    private float cube;
+    private float heating;
+    private float light;
 }

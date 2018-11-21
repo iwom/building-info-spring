@@ -16,4 +16,8 @@ public class BuildingDto implements Serializable {
     private Long id;
     private String name;
     private List<FloorDto> floorDtoList;
+    private float area;
+    private float cube;
+    private float heating;
+    private float light;
 }
