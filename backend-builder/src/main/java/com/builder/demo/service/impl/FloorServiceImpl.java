@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,7 +65,12 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
-    public List<FloorDto> getFloors() {
-        return null;
+    public List<FloorDto> getFloors(Long buildingId) {
+        List<FloorDto> floorDtos = new ArrayList<>();
+        List<Floor> floors = floorRepository.findAllByBuilding_Id(buildingId).get();
+        floors.forEach(floor -> {
+            floorDtos.add(modelMapper.map(floor, FloorDto.class));
+        });
+        return floorDtos;
     }
 }

@@ -37,6 +37,6 @@ public class BuildingController {
     @GetMapping
     @RequestMapping(path = "/buildings", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<BuildingDto> getAllBuildings() {
-        return null;
+        return buildingService.getBuildings();
     }
 }

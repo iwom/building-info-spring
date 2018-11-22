@@ -42,7 +42,7 @@ public class FloorController {
 
     @GetMapping
     @RequestMapping(path = "/{buildingId}/floors", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<FloorDto> getAllFloors() {
-        return null;
+    public List<FloorDto> getAllFloors(@PathVariable String buildingId) {
+        return floorService.getFloors(Long.parseLong(buildingId));
     }
 }

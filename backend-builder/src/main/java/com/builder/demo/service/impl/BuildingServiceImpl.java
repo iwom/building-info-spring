@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,6 +63,11 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public List<BuildingDto> getBuildings() {
-        return null;
+        List<BuildingDto> buildingDtos = new ArrayList<>();
+        List<Building> buildings = buildingRepository.findAll();
+        buildings.forEach(building -> {
+            buildingDtos.add(modelMapper.map(building, BuildingDto.class));
+        });
+        return buildingDtos;
     }
 }

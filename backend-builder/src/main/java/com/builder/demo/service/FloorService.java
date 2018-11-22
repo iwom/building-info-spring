@@ -19,5 +19,5 @@ public interface FloorService {
      */
     FloorDto createFloor(FloorDto floorDto, Long buildingId);
     FloorDto getFloor(Long buildingId, Long floorId);
-    List<FloorDto> getFloors();
+    List<FloorDto> getFloors(Long buildingId);
 }
