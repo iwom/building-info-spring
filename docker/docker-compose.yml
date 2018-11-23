@@ -48,6 +48,17 @@ services:
     networks:
       - bldr
 
+  builder-frontend:
+    container_name: builder-frontend
+    build:
+      context: ../frontend-builder
+      dockerfile: Dockerfile
+    ports:
+      - 8081:4200
+    restart: on-failure
+    networks:
+      - bldr
+
 networks:
   bldr:
     driver: bridge
