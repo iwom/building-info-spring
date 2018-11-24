@@ -5,6 +5,7 @@ import com.builder.demo.model.impl.Building;
 import com.builder.demo.model.impl.Floor;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
+import com.builder.demo.service.RoomService;
 import com.builder.demo.shared.dto.FloorDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,9 @@ public class FloorServiceImplTest {
 
     @Mock
     BuildingRepository buildingRepository;
+
+    @Mock
+    RoomService roomService;
 
     @InjectMocks
     FloorServiceImpl floorService;
@@ -93,6 +97,7 @@ public class FloorServiceImplTest {
     public void getEmptyFloor() {
         when(floorRepository.findById(any(Long.class))).thenReturn(Optional.of(floor));
         when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(new Building()));
+        when(roomService.getRooms(any(Long.class), any(Long.class))).thenReturn(null);
         FloorDto fetchedDto = floorService.getFloor(BUILDING_ID, FLOOR_ID);
 
         assertNotNull(fetchedDto);
@@ -109,9 +114,13 @@ public class FloorServiceImplTest {
         floor2.setBuilding(new Building());
         floor2.setFloorId(ANOTHER_FLOOR_ID);
         floor2.setFloorName(ANOTHER_FLOOR_NAME);
+        when(floorRepository.findById(FLOOR_ID)).thenReturn(Optional.of(floor));
+        when(floorRepository.findById(ANOTHER_FLOOR_ID)).thenReturn(Optional.of(floor2));
         when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(new Building()));
         when(floorRepository.findAllByBuilding(any(Building.class)))
                 .thenReturn(Optional.of(new ArrayList<>(Arrays.asList(floor, floor2))));
+
+        when(roomService.getRooms(any(Long.class), any(Long.class))).thenReturn(null);
         List<FloorDto> fetchedDtos = floorService.getFloors(BUILDING_ID);
 
         assertNotNull(fetchedDtos);

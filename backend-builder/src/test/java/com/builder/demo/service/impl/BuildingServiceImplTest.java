@@ -3,6 +3,8 @@ package com.builder.demo.service.impl;
 import com.builder.demo.exception.service.BuildingServiceException;
 import com.builder.demo.model.impl.Building;
 import com.builder.demo.repostitory.BuildingRepository;
+import com.builder.demo.repostitory.FloorRepository;
+import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.shared.dto.BuildingDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +29,15 @@ public class BuildingServiceImplTest {
 
     @Mock
     BuildingRepository buildingRepository;
+
+    @Mock
+    FloorRepository floorRepository;
+
+    @Mock
+    RoomRepository roomRepository;
+
+    @Mock
+    FloorServiceImpl floorService;
 
     @InjectMocks
     BuildingServiceImpl buildingService;
@@ -76,6 +87,7 @@ public class BuildingServiceImplTest {
     @Test
     public void getEmptyBuilding() {
         when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(building));
+        when(floorService.getFloors(any(Long.class))).thenReturn(null);
         BuildingDto fetchedDto = buildingService.getBuilding(BUILDING_ID);
 
         assertNotNull(fetchedDto);
@@ -90,8 +102,11 @@ public class BuildingServiceImplTest {
         building2 = new Building();
         building2.setId(ANOTHER_BUILDING_ID);
         building2.setName(ANOTHER_BUILDING_NAME);
+        when(buildingRepository.findById(BUILDING_ID)).thenReturn(Optional.of(building));
+        when(buildingRepository.findById(ANOTHER_BUILDING_ID)).thenReturn(Optional.of(building2));
         when(buildingRepository.findAll())
                 .thenReturn(new ArrayList<>(Arrays.asList(building, building2)));
+        when(floorService.getFloors(any(Long.class))).thenReturn(null);
         List<BuildingDto> fetchedDtos = buildingService.getBuildings();
          
         assertNotNull(fetchedDtos);

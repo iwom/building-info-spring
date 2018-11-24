@@ -146,6 +146,8 @@ public class RoomServiceImplTest {
         room2.setCube(CUBE + 1.5f);
         room2.setHeating(HEATING + 1.5f);
         room2.setLight(LIGHT + 1.5f);
+        when(roomRepository.findById(ROOM_ID)).thenReturn(Optional.of(room));
+        when(roomRepository.findById(ANOTHER_ROOM_ID)).thenReturn(Optional.of(room2));
         when(floorRepository.findById(any(Long.class))).thenReturn(Optional.of(new Floor()));
         when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(new Building()));
         when(roomRepository.findByBuildingAndFloor(any(Building.class), any(Floor.class)))
