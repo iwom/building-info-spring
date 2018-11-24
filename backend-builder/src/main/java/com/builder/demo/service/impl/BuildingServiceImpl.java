@@ -2,12 +2,14 @@ package com.builder.demo.service.impl;
 
 import com.builder.demo.model.impl.Building;
 import com.builder.demo.model.error.ErrorMessages;
+import com.builder.demo.model.impl.Floor;
 import com.builder.demo.model.impl.LocationVisitor;
 import com.builder.demo.model.impl.Stats;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
 import com.builder.demo.service.BuildingService;
+import com.builder.demo.service.FloorService;
 import com.builder.demo.shared.dto.BuildingDto;
 import com.builder.demo.exception.service.BuildingServiceException;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +27,15 @@ public class BuildingServiceImpl implements BuildingService {
     BuildingRepository buildingRepository;
     RoomRepository roomRepository;
     FloorRepository floorRepository;
+    FloorService floorService;
     LocationVisitor visitor;
     ModelMapper modelMapper;
 
-    public BuildingServiceImpl(BuildingRepository buildingRepository, RoomRepository roomRepository, FloorRepository floorRepository) {
+    public BuildingServiceImpl(BuildingRepository buildingRepository, RoomRepository roomRepository, FloorRepository floorRepository, FloorService floorService) {
         this.buildingRepository = buildingRepository;
         this.roomRepository = roomRepository;
         this.floorRepository = floorRepository;
+        this.floorService = floorService;
         this.modelMapper = new ModelMapper();
         this.visitor = new LocationVisitor();
     }
@@ -58,6 +62,7 @@ public class BuildingServiceImpl implements BuildingService {
         buildingDto.setCube(buildingStats.getCube());
         buildingDto.setHeating(buildingStats.getHeating());
         buildingDto.setLight(buildingStats.getLight());
+        buildingDto.setFloorDtoList(floorService.getFloors(buildingId));
         return buildingDto;
     }
 
@@ -66,7 +71,7 @@ public class BuildingServiceImpl implements BuildingService {
         List<BuildingDto> buildingDtos = new ArrayList<>();
         List<Building> buildings = buildingRepository.findAll();
         buildings.forEach(building -> {
-            buildingDtos.add(modelMapper.map(building, BuildingDto.class));
+            buildingDtos.add(getBuilding(building.getId()));
         });
         return buildingDtos;
     }

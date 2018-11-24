@@ -71,10 +71,20 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<RoomDto> getRooms(Long buildingId, Long floorId) {
+        if(!buildingRepository.findById(buildingId).isPresent())
+            throw new RoomServiceException(ErrorMessages.BUILDING_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!floorRepository.findById(floorId).isPresent())
+            throw new RoomServiceException(ErrorMessages.FLOOR_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!roomRepository.findByBuildingAndFloor(
+                buildingRepository.findById(buildingId).get(),
+                floorRepository.findById(floorId).get()).isPresent())
+            return null;
         List<RoomDto> roomDtos = new ArrayList<>();
-        List<Room> rooms = roomRepository.findAllByBuilding_IdAndFloor_FloorId(buildingId, floorId).get();
+        List<Room> rooms = roomRepository.findByBuildingAndFloor(
+                buildingRepository.findById(buildingId).get(),
+                floorRepository.findById(floorId).get()).get();
         rooms.forEach(room -> {
-            roomDtos.add(modelMapper.map(room, RoomDto.class));
+            roomDtos.add(getRoom(buildingId, floorId, room.getRoomId()));
         });
         return roomDtos;
     }

@@ -12,6 +12,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
@@ -29,10 +32,14 @@ public class BuildingServiceImplTest {
     BuildingServiceImpl buildingService;
 
     Building building;
+    Building building2;
     BuildingDto buildingDto;
+    BuildingDto buildingDto2;
 
     private static final String BUILDING_NAME = "TEST";
+    private static final String ANOTHER_BUILDING_NAME = "ANOTHER";
     private static final Long BUILDING_ID = 1L;
+    private static final Long ANOTHER_BUILDING_ID = 2L;
 
     @Before
     public void setUp() throws Exception {
@@ -62,8 +69,36 @@ public class BuildingServiceImplTest {
     @Test(expected = BuildingServiceException.class)
     public void createBuilding_throwsRecordAlreadyExists() {
         when(buildingRepository.findByName(any(String.class))).thenReturn(Optional.of(new Building()));
-
         BuildingDto storedDto = buildingService.createBuilding(buildingDto);
 
+    }
+
+    @Test
+    public void getEmptyBuilding() {
+        when(buildingRepository.findById(any(Long.class))).thenReturn(Optional.of(building));
+        BuildingDto fetchedDto = buildingService.getBuilding(BUILDING_ID);
+
+        assertNotNull(fetchedDto);
+        assertEquals(BUILDING_ID, fetchedDto.getId());
+        assertEquals(BUILDING_NAME, fetchedDto.getName());
+
+        verify(buildingRepository, times(2)).findById(any(Long.class));
+    }
+
+    @Test
+    public void getBuildings() {
+        building2 = new Building();
+        building2.setId(ANOTHER_BUILDING_ID);
+        building2.setName(ANOTHER_BUILDING_NAME);
+        when(buildingRepository.findAll())
+                .thenReturn(new ArrayList<>(Arrays.asList(building, building2)));
+        List<BuildingDto> fetchedDtos = buildingService.getBuildings();
+         
+        assertNotNull(fetchedDtos);
+        assertEquals(2, fetchedDtos.size());
+        assertEquals(building.getName(), fetchedDtos.get(0).getName());
+        assertEquals(building2.getName(), fetchedDtos.get(1).getName());
+        assertEquals(building.getId(), fetchedDtos.get(0).getId());
+        assertEquals(building2.getId(), fetchedDtos.get(1).getId());
     }
 }
