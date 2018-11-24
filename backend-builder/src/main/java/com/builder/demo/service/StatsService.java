@@ -1,6 +1,6 @@
 package com.builder.demo.service;
 
-import com.builder.demo.model.Stats;
+import com.builder.demo.model.impl.Stats;
 
 public interface StatsService {
     Stats getBuildingStats(Long buildingId);

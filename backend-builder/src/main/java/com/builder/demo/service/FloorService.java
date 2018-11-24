@@ -1,6 +1,10 @@
 package com.builder.demo.service;
 
+import com.builder.demo.model.impl.Building;
+import com.builder.demo.model.impl.Floor;
 import com.builder.demo.shared.dto.FloorDto;
+
+import java.util.List;
 
 /**
  * FloorService - interface allowing CRUD operations on {@link com.builder.demo.shared.dto.FloorDto}
@@ -9,9 +13,11 @@ import com.builder.demo.shared.dto.FloorDto;
  */
 public interface FloorService {
     /**
-     * @param floorDto FloorDto to be created and persisted to database as {@link com.builder.demo.model.Floor}
-     * @param buildingId parent id enabling to establish relationship between {@link com.builder.demo.model.Floor} and {@link com.builder.demo.model.Building}
+     * @param floorDto FloorDto to be created and persisted to database as {@link Floor}
+     * @param buildingId parent id enabling to establish relationship between {@link Floor} and {@link Building}
      * @return {@link com.builder.demo.shared.dto.FloorDto} if the object was succesfully created, 4xx error otherwise.
      */
     FloorDto createFloor(FloorDto floorDto, Long buildingId);
+    FloorDto getFloor(Long buildingId, Long floorId);
+    List<FloorDto> getFloors(Long buildingId);
 }

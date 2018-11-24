@@ -1,9 +1,9 @@
 package com.builder.demo.service.impl;
 
-import com.builder.demo.model.Building;
-import com.builder.demo.model.Floor;
-import com.builder.demo.model.Room;
-import com.builder.demo.model.Stats;
+import com.builder.demo.model.impl.Building;
+import com.builder.demo.model.impl.Floor;
+import com.builder.demo.model.impl.Room;
+import com.builder.demo.model.impl.Stats;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
@@ -11,8 +11,6 @@ import com.builder.demo.service.StatsService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j

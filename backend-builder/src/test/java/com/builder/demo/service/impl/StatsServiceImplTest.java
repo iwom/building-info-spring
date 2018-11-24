@@ -1,46 +1,30 @@
 package com.builder.demo.service.impl;
 
-import com.builder.demo.model.Building;
-import com.builder.demo.model.Floor;
-import com.builder.demo.model.Room;
-import com.builder.demo.model.Stats;
+import com.builder.demo.model.impl.Building;
+import com.builder.demo.model.impl.Floor;
+import com.builder.demo.model.impl.Room;
+import com.builder.demo.model.impl.Stats;
 import com.builder.demo.repostitory.BuildingRepository;
 import com.builder.demo.repostitory.FloorRepository;
 import com.builder.demo.repostitory.RoomRepository;
-import com.builder.demo.shared.dto.BuildingDto;
-import com.builder.demo.shared.dto.FloorDto;
-import com.builder.demo.shared.dto.RoomDto;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.builder.demo.service.impl.RoomServiceImplTest.BUILDING_ID;
-import static com.builder.demo.service.impl.RoomServiceImplTest.FLOOR_ID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.eq;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
-
-
-import static org.junit.Assert.*;
 
 
 public class StatsServiceImplTest {

@@ -12,6 +12,7 @@ public enum ErrorMessages {
     RECORD_NOT_UPDATED("Could not update record"),
     BUILDING_NOT_EXIST("Requested building does not exist"),
     FLOOR_NOT_EXIST("Requested floor does not exist"),
+    ROOM_NOT_EXIST("Requested room does not exist"),
     INTERNAL_SERVER_ERROR("Internal server error");
 
     private String errorMessage;

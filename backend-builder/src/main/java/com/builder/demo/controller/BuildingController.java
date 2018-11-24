@@ -1,6 +1,5 @@
 package com.builder.demo.controller;
 
-import com.builder.demo.model.Stats;
 import com.builder.demo.service.impl.BuildingServiceImpl;
 import com.builder.demo.service.impl.StatsServiceImpl;
 import com.builder.demo.shared.dto.BuildingDto;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.rmi.NoSuchObjectException;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -29,13 +28,15 @@ public class BuildingController {
         return buildingService.createBuilding(buildingDto);
     }
 
+    @GetMapping
     @RequestMapping(path = "/buildings/{buildingId}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Stats returnBuildingStats(@PathVariable String buildingId) throws NoSuchObjectException {
-        Stats stats = statsService.getBuildingStats(Long.parseLong(buildingId));
+    public BuildingDto getBuilding(@PathVariable String buildingId) {
+        return buildingService.getBuilding(Long.parseLong(buildingId));
+    }
 
-        if (stats.getArea() == 0 || stats.getCube() == 0 || stats.getHeating() == 0 || stats.getLight() == 0)
-            throw new NoSuchObjectException("Object not found");
-        else
-            return stats;
+    @GetMapping
+    @RequestMapping(path = "/buildings", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<BuildingDto> getAllBuildings() {
+        return buildingService.getBuildings();
     }
 }

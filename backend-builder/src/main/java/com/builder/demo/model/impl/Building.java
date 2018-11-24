@@ -1,5 +1,7 @@
-package com.builder.demo.model;
+package com.builder.demo.model.impl;
 
+import com.builder.demo.model.Location;
+import com.builder.demo.model.Visitor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,8 +13,8 @@ import java.util.List;
 /**
  * BuidlingEntity is the major abstraction unit in this project.
  * The entity holds information about all its children
- * @see com.builder.demo.model.Floor
- * @see com.builder.demo.model.Room
+ * @see Floor
+ * @see Room
  * @author iwom
  */
 @Entity
@@ -20,7 +22,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Building implements Serializable {
+public class Building implements Serializable, Location {
     /**
      * UID for serialization purposes
      */
@@ -42,11 +44,18 @@ public class Building implements Serializable {
      */
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
     @Getter
+    @ToString.Exclude
     private List<Floor> floorList;
 
     /**
      * Collection of rooms associated with the building
      */
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Room> roomList;
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }
