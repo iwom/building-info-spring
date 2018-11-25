@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/buildings")
 @Slf4j
+@CrossOrigin
 public class FloorController {
 
     @Autowired
