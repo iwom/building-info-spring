@@ -1,6 +1,11 @@
 <script src="floor-list.component.ts"></script>
 <mat-card>
   <mat-card-title>Your Floors</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button (click)="createFloorDialog()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table #table [dataSource]="floors">

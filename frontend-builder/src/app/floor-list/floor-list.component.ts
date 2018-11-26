@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Floor} from '../floor';
 import {FloorService} from './floor.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {PostDialogComponent} from '../post-dialog/post-dialog.component';
 
 @Component({
   selector: 'app-floor-list',
@@ -16,7 +17,9 @@ export class FloorListComponent implements OnInit {
   constructor(
     private floorService: FloorService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -35,6 +38,29 @@ export class FloorListComponent implements OnInit {
 
   onDetailClick(floor: Floor): void {
     this.router.navigate(['buildings', this.route.params['value'].id, 'floors', floor.floorId]);
+  }
+
+  createFloorDialog(): void {
+    const dialogRef = this.dialog.open(PostDialogComponent, {
+      width: '250px',
+      data: { type: 'Floor', name: ''}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.floorService.createFloor(this.route.params['value'].id, {floorName: result.name})
+        .subscribe(resp => {
+          this.snackbar.open('Successfully created', '', {
+            duration: 1500
+          });
+        }, err => {
+          this.snackbar.open('Could not create', '', {
+            duration: 1500
+          });
+        }, () => {
+          this.getFloors();
+        });
+    });
   }
 
 }
