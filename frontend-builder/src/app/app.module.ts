@@ -18,6 +18,7 @@ import { BuildingComponent } from './building-list/building/building.component';
 import {RoomService} from './room-list/room.service';
 import {FloorService} from './floor-list/floor.service';
 import { FloorComponent } from './floor-list/floor/floor.component';
+import { RoomComponent } from './room-list/room/room.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FloorComponent } from './floor-list/floor/floor.component';
     RoomListComponent,
     PageNotFoundComponent,
     BuildingComponent,
-    FloorComponent
+    FloorComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,

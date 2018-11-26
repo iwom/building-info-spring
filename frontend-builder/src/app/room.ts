@@ -1,6 +1,6 @@
 export class Room {
-  public floorId: number;
-  public floorName: string;
+  public roomId: number;
+  public roomName: string;
   public area: number;
   public cube: number;
   public light: number;

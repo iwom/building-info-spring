@@ -1,21 +1,21 @@
 <mat-card>
-  <mat-card-title>Building: {{building.name}}</mat-card-title>
+  <mat-card-title>Room: {{room.roomName}}</mat-card-title>
   <mat-card-subtitle>
-    Total area: {{building.area}}
+    Room area: {{room.area}}
   </mat-card-subtitle>
   <mat-card-subtitle>
-    Total cube: {{building.cube}}
+    Room cube: {{room.cube}}
   </mat-card-subtitle>
   <mat-card-subtitle>
-    Total light: {{building.light}}
+    Room light: {{room.light}}
   </mat-card-subtitle>
   <mat-card-subtitle>
-    Total heating: {{building.heating}}
+    Room heating: {{room.heating}}
   </mat-card-subtitle>
   <mat-card-footer>
     <mat-card-actions>
-      <button mat-button (click)="showFloors()">VIEW FLOORS</button>
       <button mat-button (click)="goBack()">BACK</button>
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>
+

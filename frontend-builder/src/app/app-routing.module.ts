@@ -7,6 +7,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {CommonModule} from '@angular/common';
 import {BuildingComponent} from './building-list/building/building.component';
 import {FloorComponent} from './floor-list/floor/floor.component';
+import {RoomComponent} from './room-list/room/room.component';
 
 
 const appRoutes: Routes = [
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
   {path: 'buildings/:id/floors', component: FloorListComponent},
   {path: 'buildings/:id/floors/:floorId', component: FloorComponent},
   {path: 'buildings/:id/floors/:floorId/rooms', component: RoomListComponent},
+  {path: 'buildings/:id/floors/:floorId/rooms/:roomId', component: RoomComponent}
   {path: '', redirectTo: '/buildings', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent }
 ]
