@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   {path: 'buildings/:id/floors', component: FloorListComponent},
   {path: 'buildings/:id/floors/:floorId', component: FloorComponent},
   {path: 'buildings/:id/floors/:floorId/rooms', component: RoomListComponent},
-  {path: 'buildings/:id/floors/:floorId/rooms/:roomId', component: RoomComponent}
+  {path: 'buildings/:id/floors/:floorId/rooms/:roomId', component: RoomComponent},
   {path: '', redirectTo: '/buildings', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent }
 ]

@@ -19,6 +19,7 @@ import {RoomService} from './room-list/room.service';
 import {FloorService} from './floor-list/floor.service';
 import { FloorComponent } from './floor-list/floor/floor.component';
 import { RoomComponent } from './room-list/room/room.component';
+import { PostDialogComponent } from './post-dialog/post-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RoomComponent } from './room-list/room/room.component';
     PageNotFoundComponent,
     BuildingComponent,
     FloorComponent,
-    RoomComponent
+    RoomComponent,
+    PostDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { RoomComponent } from './room-list/room/room.component';
     AppRoutingModule,
     MaterialModule
   ],
+  entryComponents: [PostDialogComponent],
   providers: [HttpClientModule, BuildingService, RoomService, FloorService, AppEndpoints],
   bootstrap: [AppComponent]
 })

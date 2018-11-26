@@ -18,4 +18,8 @@ export class BuildingService {
   getBuilding(id: number): Observable<Building> {
     return this.httpClient.get<Building>(this.appEndpoints.go().building(id), {observe: 'body'});
   }
+
+  createBuilding(buildingData: any): Observable<Building> {
+    return this.httpClient.post<Building>(this.appEndpoints.go().buildings(), buildingData, {responseType: 'json'});
+  }
 }

@@ -1,5 +1,10 @@
 <mat-card>
   <mat-card-title>Your Buildings</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button (click)="createBuildingDialog()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table #table [dataSource]="buildings">
