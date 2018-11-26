@@ -46,7 +46,7 @@ export class RoomListComponent implements OnInit {
   createRoomDialog(): void {
     const dialogRef = this.dialog.open(PostDialogComponent, {
       width: '250px',
-      data: { type: 'Room', name: ''}
+      data: { type: 'Room', name: '', area: '', cube: '', light: '', heating: ''}
     });
 
     dialogRef.afterClosed().subscribe(result => {

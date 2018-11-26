@@ -20,4 +20,15 @@ export class PostDialogComponent {
     return this.data['type'] === 'Room';
   }
 
+  isInvalid(): boolean {
+    if (!this.isRoomDialog()) {
+      return !(this.data['name'].length > 0);
+    }
+    return !(this.data['name'].length > 0 &&
+      this.data['area'].length > 0 &&
+      this.data['cube'].length > 0 &&
+      this.data['light'].length > 0 &&
+      this.data['heating'].length > 0);
+  }
+
 }
