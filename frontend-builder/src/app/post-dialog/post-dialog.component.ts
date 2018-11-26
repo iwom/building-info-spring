@@ -16,4 +16,8 @@ export class PostDialogComponent {
     this.dialogRef.close();
   }
 
+  isRoomDialog(): boolean {
+    return this.data['type'] === 'Room';
+  }
+
 }

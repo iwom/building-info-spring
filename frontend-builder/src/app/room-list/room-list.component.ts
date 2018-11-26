@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from './room.service';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Room} from '../room';
+import {PostDialogComponent} from '../post-dialog/post-dialog.component';
 
 @Component({
   selector: 'app-room-list',
@@ -16,7 +17,9 @@ export class RoomListComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -38,6 +41,35 @@ export class RoomListComponent implements OnInit {
 
   onDetailClick(room: Room): void {
     this.router.navigate(['buildings', this.route.params['value'].id, 'floors', this.route.params['value'].floorId, 'rooms', room.roomId]);
+  }
+
+  createRoomDialog(): void {
+    const dialogRef = this.dialog.open(PostDialogComponent, {
+      width: '250px',
+      data: { type: 'Room', name: ''}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.roomService.createRoom(this.route.params['value'].id, this.route.params['value'].floorId, {
+        roomName: result.name,
+        area: result.area,
+        cube: result.cube,
+        light: result.light,
+        heating: result.heating
+      })
+        .subscribe(resp => {
+          this.snackbar.open('Successfully created', '', {
+            duration: 1500
+          });
+        }, err => {
+          this.snackbar.open('Could not create', '', {
+            duration: 1500
+          });
+        }, () => {
+          this.getRooms();
+        });
+    });
   }
 
 }

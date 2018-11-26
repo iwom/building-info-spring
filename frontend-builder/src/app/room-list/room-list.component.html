@@ -1,6 +1,11 @@
 <script src="room-list.component.ts"></script>
 <mat-card>
   <mat-card-title>Your rooms</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button (click)="createRoomDialog()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table #table [dataSource]="rooms">
