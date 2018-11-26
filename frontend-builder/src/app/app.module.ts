@@ -15,15 +15,9 @@ import {BuildingService} from './building-list/building.service';
 import {AppEndpoints} from './app.endpoints';
 import {MaterialModule} from './material/material.module';
 import { BuildingComponent } from './building-list/building/building.component';
-
-
-const appRoutes: Routes = [
-  {path: 'buildings', component: BuildingListComponent},
-  {path: 'floors', component: FloorListComponent},
-  {path: 'rooms', component: RoomListComponent},
-  {path: '', redirectTo: '/buildings', pathMatch: 'full'},
-  {path: '**', component: PageNotFoundComponent }
-]
+import {RoomService} from './room-list/room.service';
+import {FloorService} from './floor-list/floor.service';
+import { FloorComponent } from './floor-list/floor/floor.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +26,8 @@ const appRoutes: Routes = [
     FloorListComponent,
     RoomListComponent,
     PageNotFoundComponent,
-    BuildingComponent
+    BuildingComponent,
+    FloorComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +36,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [HttpClientModule, BuildingService, AppEndpoints],
+  providers: [HttpClientModule, BuildingService, RoomService, FloorService, AppEndpoints],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

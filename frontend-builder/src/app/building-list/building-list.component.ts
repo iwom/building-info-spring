@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import {MatIconModule} from '@angular/material';
 import {Building} from '../building';
-import {Observable} from 'rxjs/Observable';
 import {BuildingService} from './building.service';
 import {Router} from '@angular/router';
 
@@ -20,20 +18,16 @@ export class BuildingListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.buildings = this.getBuildings();
+    this.getBuildings();
   }
 
-  getBuildings(): MatTableDataSource<Building> {
-    const tableSource = new MatTableDataSource<Building>();
+  getBuildings(): void {
     this.buildingService.getBuildings().subscribe(resp => {
-      tableSource.data = resp;
-      console.log(tableSource);
+      this.buildings.data = resp;
     });
-    return tableSource;
   }
 
   onDetailClick(building: Building): void {
-    console.log(building);
     this.router.navigate(['buildings', building.id]);
   }
 

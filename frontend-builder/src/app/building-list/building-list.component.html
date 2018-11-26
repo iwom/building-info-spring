@@ -1,43 +1,46 @@
-<div class="divider">
-  <p>Your buildings</p>
-</div>
-<div class="mat-elevation-z8">
-  <mat-table #table [dataSource]="buildings">
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-      <mat-cell *matCellDef="let building"> {{building.id}} </mat-cell>
-    </ng-container>
+<mat-card>
+  <mat-card-title>Your Buildings</mat-card-title>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="buildings">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+          <mat-cell *matCellDef="let building"> {{building.id}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let building"> {{building.name}} </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let building"> {{building.name}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="area">
-      <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
-      <mat-cell *matCellDef="let building"> {{building.area}} </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="area">
+          <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
+          <mat-cell *matCellDef="let building"> {{building.area}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="cube">
-      <mat-header-cell *matHeaderCellDef> Cube </mat-header-cell>
-      <mat-cell *matCellDef="let building"> {{building.cube}} </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="cube">
+          <mat-header-cell *matHeaderCellDef> Cube </mat-header-cell>
+          <mat-cell *matCellDef="let building"> {{building.cube}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="light">
-      <mat-header-cell *matHeaderCellDef> Light </mat-header-cell>
-      <mat-cell *matCellDef="let building"> {{building.light}} </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="light">
+          <mat-header-cell *matHeaderCellDef> Light </mat-header-cell>
+          <mat-cell *matCellDef="let building"> {{building.light}} </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="heating">
-      <mat-header-cell *matHeaderCellDef> Heating </mat-header-cell>
-      <mat-cell *matCellDef="let building"> {{building.heating}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="detail">
-      <mat-header-cell *matHeaderCellDef> Detail </mat-header-cell>
-      <mat-cell *matCellDef="let building"> <mat-icon (click)="onDetailClick(building)">more_horiz</mat-icon> </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="heating">
+          <mat-header-cell *matHeaderCellDef> Heating </mat-header-cell>
+          <mat-cell *matCellDef="let building"> {{building.heating}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="detail">
+          <mat-header-cell *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell *matCellDef="let building"> <mat-icon (click)="onDetailClick(building)">more_horiz</mat-icon> </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
+

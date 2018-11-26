@@ -1,15 +1,1 @@
-.divider {
-  padding: 0.3rem 0;
-  width: auto;
-  background-color: #acacac;
-  color: white;
-  text-align: center;
-  font-family: 'Raleway', Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  font-size: 1.25rem;
-  text-transform: uppercase;
-}
 
-mat-icon {
-  cursor: pointer;
-}
