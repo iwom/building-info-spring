@@ -34,7 +34,7 @@
     </ng-container>
     <ng-container matColumnDef="detail">
       <mat-header-cell *matHeaderCellDef> Detail </mat-header-cell>
-      <mat-cell *matCellDef="let building"> <mat-icon>more_horiz</mat-icon> </mat-cell>
+      <mat-cell *matCellDef="let building"> <mat-icon (click)="onDetailClick(building)">more_horiz</mat-icon> </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

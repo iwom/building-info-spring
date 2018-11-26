@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BuildingService} from './building-list/building.service';
 import {AppEndpoints} from './app.endpoints';
 import {MaterialModule} from './material/material.module';
+import { BuildingComponent } from './building-list/building/building.component';
 
 
 const appRoutes: Routes = [
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     BuildingListComponent,
     FloorListComponent,
     RoomListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BuildingComponent
   ],
   imports: [
     BrowserModule,

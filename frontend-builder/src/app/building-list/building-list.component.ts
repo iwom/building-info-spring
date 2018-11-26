@@ -4,6 +4,7 @@ import {MatIconModule} from '@angular/material';
 import {Building} from '../building';
 import {Observable} from 'rxjs/Observable';
 import {BuildingService} from './building.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-building-list',
@@ -14,7 +15,8 @@ export class BuildingListComponent implements OnInit {
   buildings: MatTableDataSource<Building> = new MatTableDataSource();
   displayedColumns = ['id', 'name', 'area', 'cube', 'light', 'heating', 'detail'];
   constructor(
-    private buildingService: BuildingService
+    private buildingService: BuildingService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,6 +30,11 @@ export class BuildingListComponent implements OnInit {
       console.log(tableSource);
     });
     return tableSource;
+  }
+
+  onDetailClick(building: Building): void {
+    console.log(building);
+    this.router.navigate(['buildings', building.id]);
   }
 
 }
