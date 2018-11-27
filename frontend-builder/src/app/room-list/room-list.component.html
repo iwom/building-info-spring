@@ -1,0 +1,57 @@
+<script src="room-list.component.ts"></script>
+<mat-card>
+  <mat-card-title>Your rooms</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button (click)="createRoomDialog()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="rooms">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+          <mat-cell *matCellDef="let room"> {{room.roomId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let room"> {{room.roomName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="area">
+          <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
+          <mat-cell *matCellDef="let room"> {{room.area}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cube">
+          <mat-header-cell *matHeaderCellDef> Cube </mat-header-cell>
+          <mat-cell *matCellDef="let room"> {{room.cube}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="light">
+          <mat-header-cell *matHeaderCellDef> Light </mat-header-cell>
+          <mat-cell *matCellDef="let room"> {{room.light}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="heating">
+          <mat-header-cell *matHeaderCellDef> Heating </mat-header-cell>
+          <mat-cell *matCellDef="let room"> {{room.heating}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="detail">
+          <mat-header-cell *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell *matCellDef="let room"> <mat-icon (click)="onDetailClick(room)">more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions>
+      <button mat-button (click)="goBack()">BACK</button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>
+

@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>New {{data.type}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.name" placeholder="Give it a name">
+  </mat-form-field>
+  <mat-form-field *ngIf="isRoomDialog()">
+    <input matInput required [(ngModel)]="data.area" placeholder="Area">
+  </mat-form-field>
+  <mat-form-field *ngIf="isRoomDialog()">
+    <input matInput required [(ngModel)]="data.cube" placeholder="Cube">
+  </mat-form-field>
+  <mat-form-field *ngIf="isRoomDialog()">
+    <input matInput required [(ngModel)]="data.light" placeholder="Light">
+  </mat-form-field>
+  <mat-form-field *ngIf="isRoomDialog()">
+    <input matInput required [(ngModel)]="data.heating" placeholder="Heating">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()" cdkFocusInitial>Create</button>
+</div>
