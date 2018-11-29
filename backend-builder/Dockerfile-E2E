@@ -1,4 +1,4 @@
 FROM maven:3.5-jdk-8-alpine AS build
+RUN apk update && apk add bash
 COPY /src /usr/src/spring/src
 COPY pom.xml /usr/src/spring
-RUN mvn -f /usr/src/spring/pom.xml clean test

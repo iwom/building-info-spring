@@ -27,6 +27,9 @@ services:
     restart: on-failure
     depends_on:
       - builder-db
+    command: bash -c "mvn -f usr/src/spring/pom.xml test package && cd usr/src/spring/target && ls -la"
+    volumes:
+      - ./new:/usr/src/spring/target
     networks:
       - bldr
 
