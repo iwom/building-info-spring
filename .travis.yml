@@ -11,5 +11,9 @@ before_install:
  - sudo mv docker-compose /usr/local/bin
 
 script:
+  - sudo service mysql stop
   - cd docker
-  - docker-compose -f docker-compose-e2e.yml build
+  - docker-compose -f docker-compose-e2e.yml up --build
+  - pwd
+  - cd new
+  - ls -la
