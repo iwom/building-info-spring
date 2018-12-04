@@ -20,6 +20,19 @@ public interface RoomService {
      * @return {@link com.builder.demo.shared.dto.RoomDto} if the object was succesfully created, 4xx error otherwise.
      */
     RoomDto createRoom(RoomDto roomDto, Long buildingId, Long floorId);
+
+    /**
+     * @param buildingId Building Id to search in database
+     * @param floorId Floor Id to search in database
+     * @param roomId Room Id to search in database
+     * @return {@link com.builder.demo.shared.dto.RoomDto} if object with requested params value exists in database, 4xx error otherwise.
+     */
     RoomDto getRoom(Long buildingId, Long floorId, Long roomId);
+
+    /**
+     * @param buildingId Building Id to search in database
+     * @param floorId Floor Id to search in database
+     * @return List of {@link com.builder.demo.shared.dto.RoomDto} if the set of objects (with matching buildingId and floorId) exists in database, empty list otherwise.
+     */
     List<RoomDto> getRooms(Long buildingId, Long floorId);
 }

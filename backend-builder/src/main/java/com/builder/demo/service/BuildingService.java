@@ -16,7 +16,16 @@ public interface BuildingService {
      * @return {@link com.builder.demo.shared.dto.BuildingDto} if the object was succesfully created, 4xx error otherwise.
      */
     BuildingDto createBuilding(BuildingDto buildingDto);
+
+    /**
+     * @param buildingId Building Id to search in database
+     * @return {@link com.builder.demo.shared.dto.BuildingDto} if the object exists in database, 4xx error otherwise.
+     */
     BuildingDto getBuilding(Long buildingId);
+
+    /**
+     * @return List of {@link com.builder.demo.shared.dto.BuildingDto} if the set of objects exists in database, empty list otherwise.
+     */
     List<BuildingDto> getBuildings();
 
 }
