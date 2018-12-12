@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -115,5 +116,14 @@ public class BuildingServiceImplTest {
         assertEquals(building2.getName(), fetchedDtos.get(1).getName());
         assertEquals(building.getId(), fetchedDtos.get(0).getId());
         assertEquals(building2.getId(), fetchedDtos.get(1).getId());
+    }
+
+    @Test
+    public void getBuildings_empty() {
+        when(buildingRepository.findAll()).thenReturn(new ArrayList<>());
+        List<BuildingDto> emptyBuildingArray = buildingService.getBuildings();
+        assertEquals(0, emptyBuildingArray.size());
+
+        verify(buildingRepository, times(1)).findAll();
     }
 }
