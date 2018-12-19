@@ -35,4 +35,13 @@ public interface RoomService {
      * @return List of {@link com.builder.demo.shared.dto.RoomDto} if the set of objects (with matching buildingId and floorId) exists in database, empty list otherwise.
      */
     List<RoomDto> getRooms(Long buildingId, Long floorId);
+
+    /**
+     * @param roomDto RoomDto to be updated and persisted to database as {@link Room}
+     * @param buildingId Building Id to search in database
+     * @param floorId Floor Id to search in database
+     * @param floorId Room Id to search in database, room of this id will be updated
+     * @return {@link com.builder.demo.shared.dto.RoomDto} if object (with matching buildingId and floorId and roomId) exists in database and was updated, 4xx otherwise
+     */
+    RoomDto updateRoom(RoomDto roomDto, Long buildingId, Long floorId, Long roomId);
 }

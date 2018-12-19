@@ -49,4 +49,10 @@ public class RoomController {
     public List<RoomDto> getAllRooms(@PathVariable String buildingId, @PathVariable String floorId) {
         return roomService.getRooms(Long.parseLong(buildingId), Long.parseLong(floorId));
     }
+
+    @PutMapping
+    @RequestMapping(path = "/{floorId}/rooms/{roomId}", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public RoomDto updateRoom(@PathVariable String buildingId, @PathVariable String floorId, @PathVariable String roomId, @RequestBody RoomDto roomDto) {
+        return roomService.updateRoom(roomDto, Long.parseLong(buildingId), Long.parseLong(floorId), Long.parseLong(roomId));
+    }
 }

@@ -89,4 +89,20 @@ public class RoomServiceImpl implements RoomService {
         return roomDtos;
     }
 
+    @Override
+    public RoomDto updateRoom(RoomDto roomDto, Long buildingId, Long floorId, Long roomId) {
+        if(!buildingRepository.findById(buildingId).isPresent())
+            throw new RoomServiceException(ErrorMessages.BUILDING_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!floorRepository.findById(floorId).isPresent())
+            throw new RoomServiceException(ErrorMessages.FLOOR_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        if(!roomRepository.findById(roomId).isPresent())
+            throw new RoomServiceException(ErrorMessages.ROOM_NOT_EXIST.getErrorMessage(), HttpStatus.BAD_REQUEST);
+        Room room = roomRepository.findById(roomId).get();
+        Room updatedRoom = modelMapper.map(roomDto, Room.class);
+        updatedRoom.setRoomId(room.getRoomId());
+        updatedRoom.setBuilding(room.getBuilding());
+        updatedRoom.setFloor(room.getFloor());
+        Room returnedRoom = roomRepository.save(updatedRoom);
+        return modelMapper.map(returnedRoom, RoomDto.class);
+    }
 }
