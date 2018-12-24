@@ -2,7 +2,7 @@
 <mat-card>
   <mat-card-title>Your rooms</mat-card-title>
   <mat-card-subtitle>
-    <button mat-button (click)="createRoomDialog()">
+    <button mat-button (click)="createPostRoomDialog()">
       <mat-icon>add_box</mat-icon>
     </button>
   </mat-card-subtitle>
@@ -37,6 +37,10 @@
         <ng-container matColumnDef="heating">
           <mat-header-cell *matHeaderCellDef> Heating </mat-header-cell>
           <mat-cell *matCellDef="let room"> {{room.heating}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-cell *matCellDef="let room"> <mat-icon (click)="onEditClick(room)">edit</mat-icon> </mat-cell>
         </ng-container>
         <ng-container matColumnDef="detail">
           <mat-header-cell *matHeaderCellDef> Detail </mat-header-cell>

@@ -7,7 +7,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   styleUrls: []
 })
 export class PostDialogComponent {
-
   constructor(
     public dialogRef: MatDialogRef<PostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -18,6 +17,10 @@ export class PostDialogComponent {
 
   isRoomDialog(): boolean {
     return this.data['type'] === 'Room';
+  }
+
+  getApprovalText(): string {
+    return this.data['text'] ? this.data['text'] : 'Create';
   }
 
   isInvalid(): boolean {

@@ -22,4 +22,8 @@ export class RoomService {
   createRoom(buildingId: number, floorId: number, roomData: any): Observable<Room> {
     return this.httpClient.post<Room>(this.appEndpoints.go().rooms(buildingId, floorId), roomData, {responseType: 'json'});
   }
+
+  updateRoom(buildingId: number, floorId: number, roomId: number, roomData: any): Observable<Room> {
+    return this.httpClient.put<Room>(this.appEndpoints.go().room(buildingId, floorId, roomId), roomData, {responseType: 'json'});
+  }
 }
