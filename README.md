@@ -1,4 +1,4 @@
-# building-info-spring
+[![codecov](https://codecov.io/gh/iwom/building-info-spring/branch/develop/graph/badge.svg)](https://codecov.io/gh/iwom/building-info-spring)
 
 # How to:
 
@@ -7,7 +7,8 @@
   - go to directory with docker-compose*.yml
   - docker-compose up
   - default compose .yml starts app with `docker` Spring profile
-  - visit localhost:8080/enter-your-random-text-here
+  - visit localhost:8080 to test API
+  - visit localhost:8081 to test frontend
 
 ## Develop:
   - clone this repo
@@ -21,15 +22,16 @@
   - see .travis.yml to configure mvn behaviour
   - Spring profile is not set and falls back to `default` in-memory H2
 
-#FAQ:
-
 ### How to run this app for agile demo?
 Simply navigate to `docker` dir and hit `$ docker-compose up`. Make sure that no other containers (associated with backend-builder project) are running. When creating containers is done, navigate to `localhost:8080` and test the API.
 Spring logs from docker-container suite may tell you that backend-builder encountered an error while booting. Ignore this message, backend-builder becomes available shortly after mysql container does.
 
 ### Where are my javadocs?
 Build the app locally then find generated javadoc in `/target/site/apidocs/com`
-Run `index.html` with Web Browser (*important* not that easy to find & show via docker)
+Run `index.html` with Web Browser
+
+### How to check code coverage manually?
+Run `mvn clean package` and open `/target/site/jacoco/index.html`
 
 ### Where is my .jar file?
 When your app has been successfully run in docker type:
