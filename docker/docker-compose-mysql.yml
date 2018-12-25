@@ -13,12 +13,10 @@ services:
       - 3306:3306
     volumes:
       - /data/mysql
-    restart: always
     networks:
       - bldr
 
   builder-phpmy:
-    restart: always
     container_name: builder-myadmin
     image: phpmyadmin/phpmyadmin
     ports:

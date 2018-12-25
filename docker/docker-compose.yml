@@ -13,7 +13,6 @@ services:
       - 3306:3306
     volumes:
       - /data/mysql
-    restart: always
     healthcheck:
       test:  ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 15s
@@ -23,7 +22,6 @@ services:
       - bldr
 
   builder-phpmy:
-    restart: always
     container_name: builder-myadmin
     image: phpmyadmin/phpmyadmin
     ports:
