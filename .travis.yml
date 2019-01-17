@@ -1,15 +1,9 @@
-sudo: required
-services:
-  - docker
-
-env:
-  COMPOSE_VERSION: 1.22.0
-
-before_install:
- - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
- - chmod +x docker-compose
- - sudo mv docker-compose /usr/local/bin
+language: java
 
 script:
-  - cd docker
-  - docker-compose -f docker-compose-e2e.yml build
+  - cd backend-builder
+  - mvn clean package
+  - cd ..
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

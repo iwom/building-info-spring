@@ -13,7 +13,6 @@ services:
       - 3306:3306
     volumes:
       - /data/mysql
-    restart: always
     healthcheck:
       test:  ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 15s
@@ -23,7 +22,6 @@ services:
       - bldr
 
   builder-phpmy:
-    restart: always
     container_name: builder-myadmin
     image: phpmyadmin/phpmyadmin
     ports:
@@ -45,6 +43,17 @@ services:
     restart: on-failure
     depends_on:
       - builder-db
+    networks:
+      - bldr
+
+  builder-frontend:
+    container_name: builder-frontend
+    build:
+      context: ../frontend-builder
+      dockerfile: Dockerfile
+    ports:
+      - 8081:4200
+    restart: on-failure
     networks:
       - bldr
 
